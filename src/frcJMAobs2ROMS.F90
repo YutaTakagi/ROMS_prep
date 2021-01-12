@@ -1,5 +1,5 @@
 
-!!!=== Copyright (c) 2020 Takashi NAKAMURA  =====
+!!!=== Copyright (c) 2020-2021 Takashi NAKAMURA  =====
 
 PROGRAM frcJMAobs2ROMS
   use netcdf
@@ -100,8 +100,10 @@ PROGRAM frcJMAobs2ROMS
   namelist/frc_jmaobs/LW_prefix, LW_suffix
   namelist/frc_jmaobs/FRC_prefix
   ! Read parameters in namelist file
-  read (*, nml=refdate)
-  read (*, nml=frc_jmaobs)
+  read (5, nml=refdate)
+  rewind(5)
+  read (5, nml=frc_jmaobs)
+  rewind(5)
 
 !---- Modify time-unit description for NetCDF output ---------------------------------
       
@@ -211,7 +213,7 @@ PROGRAM frcJMAobs2ROMS
         allocate( cdata(9) )
         allocate( rdata(1:1+nnc,data_num) )
 
-        open(51, file = ANGLE_DIR//'/angle.csv' )
+        open(51, file = ANGLE_DIR//'/wind_angle.csv' )
         do i=1,16
           read(51,*) cangle(i), rangle(i)
 !          write(*,*) cangle(i), rangle(i)
