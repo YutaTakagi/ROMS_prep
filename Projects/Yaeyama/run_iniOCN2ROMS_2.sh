@@ -3,8 +3,8 @@
 # Please choose one of the following options
 #
 #export MY_CPP_FLAGS="-DHYCOM_MODEL"
-#export MY_CPP_FLAGS="-DJCOPE_MODEL"
-export MY_CPP_FLAGS="-DROMS_MODEL"
+export MY_CPP_FLAGS="-DJCOPE_MODEL"
+#export MY_CPP_FLAGS="-DROMS_MODEL"
 
 # ===== HYCOM option ====================================================================
 
@@ -29,10 +29,10 @@ export MY_CPP_FLAGS="-DROMS_MODEL"
 #export MY_CPP_FLAGS="${MY_CPP_FLAGS} -DSKIP_CHECK_TIME"
 
 # ===== ROMS option ======================================================================
-export MY_CPP_FLAGS="${MY_CPP_FLAGS} -DWET_DRY"
+#export MY_CPP_FLAGS="${MY_CPP_FLAGS} -DWET_DRY"
 
 # ===== JCOPE option =====================================================================
-#export MY_CPP_FLAGS="${MY_CPP_FLAGS} -DJCOPE_T"
+export MY_CPP_FLAGS="${MY_CPP_FLAGS} -DJCOPE_T"
 
 # ===== Tide model =======================================================================
 #tide_model=naotide
@@ -49,18 +49,18 @@ export MY_CPP_FLAGS="${MY_CPP_FLAGS} -DHYCOM_TIME_DIR='${SRC_DIR}'"
 if [[ ${tide_model} == naotide ]]; then
 	MY_CPP_FLAGS="${MY_CPP_FLAGS} -DNAOTIDE";
 	MY_CPP_FLAGS="${MY_CPP_FLAGS} -DOMAP_DIR='${SRC_DIR}/omap'"
-	gfortran -fbounds-check -fno-align-commons ${SRC_DIR}/mod_calendar.f90 ${SRC_DIR}/mod_utility.f90 ${SRC_DIR}/mod_interpolation.f90 ${SRC_DIR}/mod_jcope.F90 ${SRC_DIR}/mod_roms_netcdf.F90 ${SRC_DIR}/set_scoord.f90 ${SRC_DIR}/set_depth.F90 ${SRC_DIR}/naotide.F ${SRC_DIR}/pzcon.f ${SRC_DIR}/potmp.f ${SRC_DIR}/iniOCN2ROMS.F90 ${MY_CPP_FLAGS} -fopenmp -O2 -I/usr/include -L/usr/lib -lnetcdff -o iniOCN2ROMS.exe;
+	gfortran -fbounds-check -fno-align-commons ${SRC_DIR}/mod_calendar.f90 ${SRC_DIR}/mod_utility.F90 ${SRC_DIR}/mod_interpolation.f90 ${SRC_DIR}/mod_jcope.F90 ${SRC_DIR}/mod_roms_netcdf.F90 ${SRC_DIR}/set_scoord.f90 ${SRC_DIR}/set_depth.F90 ${SRC_DIR}/naotide.F ${SRC_DIR}/pzcon.f ${SRC_DIR}/potmp.f ${SRC_DIR}/iniOCN2ROMS.F90 ${MY_CPP_FLAGS} -fopenmp -O2 -I/usr/include -L/usr/lib -lnetcdff -o iniOCN2ROMS.exe;
 elif [[ ${tide_model} == naotidej ]]; then
 	MY_CPP_FLAGS="${MY_CPP_FLAGS} -DNAOTIDEJ";
 	MY_CPP_FLAGS="${MY_CPP_FLAGS} -DOMAPJ_DIR='${SRC_DIR}/omapj'";
-	gfortran -fbounds-check -fno-align-commons ${SRC_DIR}/mod_calendar.f90 ${SRC_DIR}/mod_utility.f90 ${SRC_DIR}/mod_interpolation.f90 ${SRC_DIR}/mod_jcope.F90 ${SRC_DIR}/mod_roms_netcdf.F90 ${SRC_DIR}/set_scoord.f90 ${SRC_DIR}/set_depth.F90 ${SRC_DIR}/naotidej.F ${SRC_DIR}/pzcon.f ${SRC_DIR}/potmp.f ${SRC_DIR}/iniOCN2ROMS.F90 ${MY_CPP_FLAGS} -fopenmp -O2 -I/usr/include -L/usr/lib -lnetcdff -o iniOCN2ROMS.exe;
+	gfortran -fbounds-check -fno-align-commons ${SRC_DIR}/mod_calendar.f90 ${SRC_DIR}/mod_utility.F90 ${SRC_DIR}/mod_interpolation.f90 ${SRC_DIR}/mod_jcope.F90 ${SRC_DIR}/mod_roms_netcdf.F90 ${SRC_DIR}/set_scoord.f90 ${SRC_DIR}/set_depth.F90 ${SRC_DIR}/naotidej.F ${SRC_DIR}/pzcon.f ${SRC_DIR}/potmp.f ${SRC_DIR}/iniOCN2ROMS.F90 ${MY_CPP_FLAGS} -fopenmp -O2 -I/usr/include -L/usr/lib -lnetcdff -o iniOCN2ROMS.exe;
 else
 	MY_CPP_FLAGS="${MY_CPP_FLAGS} -DOMAP_DIR='${SRC_DIR}/omap'";
-	gfortran -fbounds-check -fno-align-commons ${SRC_DIR}/mod_calendar.f90 ${SRC_DIR}/mod_utility.f90 ${SRC_DIR}/mod_interpolation.f90 ${SRC_DIR}/mod_jcope.F90 ${SRC_DIR}/mod_roms_netcdf.F90 ${SRC_DIR}/set_scoord.f90  ${SRC_DIR}/set_depth.F90 ${SRC_DIR}/naotide.F ${SRC_DIR}/pzcon.f ${SRC_DIR}/potmp.f ${SRC_DIR}/iniOCN2ROMS.F90 ${MY_CPP_FLAGS} -fopenmp -O2 -I/usr/include -L/usr/lib -lnetcdff -o iniOCN2ROMS.exe;
+	gfortran -fbounds-check -fno-align-commons ${SRC_DIR}/mod_calendar.f90 ${SRC_DIR}/mod_utility.F90 ${SRC_DIR}/mod_interpolation.f90 ${SRC_DIR}/mod_jcope.F90 ${SRC_DIR}/mod_roms_netcdf.F90 ${SRC_DIR}/set_scoord.f90  ${SRC_DIR}/set_depth.F90 ${SRC_DIR}/naotide.F ${SRC_DIR}/pzcon.f ${SRC_DIR}/potmp.f ${SRC_DIR}/iniOCN2ROMS.F90 ${MY_CPP_FLAGS} -fopenmp -O2 -I/usr/include -L/usr/lib -lnetcdff -o iniOCN2ROMS.exe;
 fi
 
 rm *.mod
 
 export OMP_NUM_THREADS=12
 
-./iniOCN2ROMS.exe < Fukido1.in
+./iniOCN2ROMS.exe < Yaeyama2.in
